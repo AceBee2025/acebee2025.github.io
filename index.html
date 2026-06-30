@@ -1,5 +1,815 @@
 <!DOCTYPE html>
-<html>
-  <head><title>My Website</title></head>
-  <body><h1>Hello, World!</h1></body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John Smith — VP, Product Management &amp; BI/Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1929;
+    --panel:#142847;
+    --steel:#1E3A5F;
+    --amber:#C9742C;
+    --amber-bright:#E08A3E;
+    --paper:#F1EDE4;
+    --paper-dim:#E8E2D4;
+    --grey:#8A95A5;
+    --grey-light:#B9C1CD;
+    --white:#FAF8F4;
+
+    --display: 'Fraunces', serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+
+    --maxw: 1180px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  a{color:inherit;}
+  ::selection{background:var(--amber); color:var(--white);}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 40px;}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(11,25,41,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px;
+  }
+  .nav-mark{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.08em;
+    color:var(--white); display:flex; align-items:center; gap:10px;
+  }
+  .nav-mark .dot{width:8px; height:8px; border-radius:50%; background:var(--amber-bright); box-shadow:0 0 0 3px rgba(224,138,62,0.25);}
+  .nav-links{display:flex; gap:36px; list-style:none;}
+  .nav-links a{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.06em;
+    color:var(--grey-light); text-decoration:none; text-transform:uppercase;
+    transition:color 0.2s ease;
+    position:relative; padding-bottom:4px;
+  }
+  .nav-links a:hover{color:var(--white);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--amber-bright); transition:width 0.25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.04em;
+    color:var(--ink); background:var(--amber-bright);
+    padding:9px 18px; border-radius:3px; text-decoration:none;
+    text-transform:uppercase; font-weight:600;
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  .nav-cta:hover{background:var(--white); transform:translateY(-1px);}
+
+  /* ============ HERO ============ */
+  .hero{
+    background:
+      radial-gradient(ellipse 900px 500px at 80% -10%, rgba(201,116,44,0.18), transparent 60%),
+      linear-gradient(180deg, var(--ink) 0%, var(--panel) 100%);
+    color:var(--white);
+    padding:168px 0 0 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid-bg{
+    position:absolute; inset:0; opacity:0.5;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:linear-gradient(180deg, black, transparent 85%);
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .hero-top{
+    display:grid; grid-template-columns:1fr 220px; gap:56px; align-items:start;
+  }
+  .hero-photo-col{display:flex; flex-direction:column; align-items:center; gap:16px; padding-top:6px;}
+  .hero-photo{
+    width:188px; height:188px; border-radius:50%;
+    background:linear-gradient(155deg, var(--steel) 0%, var(--ink) 70%);
+    border:2px solid rgba(224,138,62,0.55);
+    box-shadow:0 0 0 6px rgba(255,255,255,0.04), 0 18px 36px rgba(0,0,0,0.35);
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .hero-photo::after{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 30% 20%, rgba(224,138,62,0.22), transparent 55%);
+  }
+  .hero-photo-initials{
+    font-family:var(--display); font-weight:600; font-size:56px; color:var(--white);
+    letter-spacing:0.02em; position:relative; z-index:1;
+  }
+  .hero-photo-caption{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--grey); text-align:center;
+  }
+  .hero-eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.14em;
+    color:var(--amber-bright); text-transform:uppercase;
+    display:flex; align-items:center; gap:12px; margin-bottom:28px;
+  }
+  .hero-eyebrow .line{height:1px; width:42px; background:var(--amber-bright); opacity:0.6;}
+  .hero h1{
+    font-family:var(--display); font-weight:600; font-optical-sizing:auto;
+    font-size:clamp(42px, 6.4vw, 84px); line-height:1.02; letter-spacing:-0.01em;
+    max-width:920px;
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:500; color:var(--grey-light);
+  }
+  .hero-role{
+    font-family:var(--mono); font-size:15px; letter-spacing:0.04em; color:var(--grey-light);
+    margin-top:26px; max-width:640px;
+  }
+  .hero-role strong{color:var(--white); font-weight:600;}
+  .hero-sub{
+    margin-top:18px; font-size:17px; color:var(--grey-light); max-width:600px; line-height:1.7;
+  }
+  .hero-actions{
+    margin-top:42px; display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:0.04em; text-transform:uppercase;
+    padding:14px 26px; border-radius:3px; text-decoration:none; font-weight:600;
+    display:inline-flex; align-items:center; gap:10px;
+    transition:all 0.2s ease;
+  }
+  .btn-primary{background:var(--amber-bright); color:var(--ink);}
+  .btn-primary:hover{background:var(--white); transform:translateY(-1px);}
+  .btn-ghost{border:1px solid rgba(255,255,255,0.22); color:var(--white);}
+  .btn-ghost:hover{border-color:var(--amber-bright); background:rgba(255,255,255,0.04);}
+  .btn-download{
+    border:1px solid rgba(224,138,62,0.5); color:var(--amber-bright);
+    background:rgba(224,138,62,0.08);
+  }
+  .btn-download:hover{background:rgba(224,138,62,0.16); border-color:var(--amber-bright); transform:translateY(-1px);}
+  .btn-download svg{width:14px; height:14px;}
+
+  /* Manifest strip — dashboard-style metric readout */
+  .manifest{
+    margin-top:88px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    background:rgba(0,0,0,0.18);
+  }
+  .manifest .wrap{
+    display:grid; grid-template-columns:repeat(4,1fr);
+    padding:0;
+  }
+  .manifest-item{
+    padding:30px 28px; border-right:1px solid rgba(255,255,255,0.08);
+  }
+  .manifest .wrap > .manifest-item:last-child{border-right:none;}
+  .manifest-label{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--grey); margin-bottom:10px;
+  }
+  .manifest-value{
+    font-family:var(--display); font-size:34px; font-weight:600; color:var(--white); line-height:1;
+  }
+  .manifest-value span{color:var(--amber-bright);}
+  .manifest-desc{
+    font-size:13px; color:var(--grey-light); margin-top:8px; line-height:1.5;
+  }
+
+  /* ============ SECTION SHARED ============ */
+  section{padding:120px 0;}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:64px; flex-wrap:wrap; gap:20px;
+    border-bottom:1px solid rgba(11,25,41,0.12);
+    padding-bottom:28px;
+  }
+  .section-tag{
+    font-family:var(--mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--amber); font-weight:600;
+  }
+  .section-head h2{
+    font-family:var(--display); font-size:clamp(30px,3.6vw,46px); font-weight:600;
+    margin-top:10px; letter-spacing:-0.01em;
+  }
+  .section-head .section-note{
+    font-family:var(--body); font-size:15px; color:var(--steel); max-width:340px; text-align:right;
+    padding-top:6px;
+  }
+
+  /* ============ IMPACT / ABOUT ============ */
+  .impact{background:var(--paper);}
+  .impact-layout{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:80px; align-items:start;
+  }
+  .impact-text p{
+    font-size:18px; color:var(--steel); margin-bottom:20px; max-width:560px;
+  }
+  .impact-text strong{color:var(--ink); font-weight:600;}
+  .pillars{
+    display:flex; flex-direction:column; gap:0;
+  }
+  .pillar{
+    display:grid; grid-template-columns:56px 1fr; gap:18px;
+    padding:22px 0; border-bottom:1px solid rgba(11,25,41,0.1);
+  }
+  .pillar:first-child{padding-top:0;}
+  .pillar-icon{
+    font-family:var(--mono); font-size:13px; color:var(--amber);
+    display:flex; align-items:flex-start; padding-top:4px;
+  }
+  .pillar h3{font-size:17px; font-weight:700; margin-bottom:6px;}
+  .pillar p{font-size:14.5px; color:var(--steel);}
+
+  /* ============ EXPERIENCE / ROUTE LINE ============ */
+  .experience{background:var(--ink); color:var(--white); position:relative;}
+  .experience .section-head{border-bottom-color:rgba(255,255,255,0.12);}
+  .experience .section-head .section-note{color:var(--grey-light);}
+  .route{
+    position:relative;
+    padding-left:36px;
+  }
+  .route-track{
+    position:absolute; left:8px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(180deg, var(--amber-bright), rgba(201,116,44,0.15));
+  }
+  .stop{
+    position:relative; padding-bottom:56px;
+  }
+  .stop:last-child{padding-bottom:0;}
+  .stop-node{
+    position:absolute; left:-36px; top:6px;
+    width:18px; height:18px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--amber-bright);
+    box-shadow:0 0 0 4px var(--ink), 0 0 0 5px rgba(255,255,255,0.08);
+  }
+  .stop-node.current{background:var(--amber-bright); box-shadow:0 0 0 4px var(--ink), 0 0 0 5px rgba(224,138,62,0.35), 0 0 18px rgba(224,138,62,0.6);}
+  .stop-head{
+    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px;
+    margin-bottom:6px;
+  }
+  .stop-role{font-family:var(--display); font-size:24px; font-weight:600;}
+  .stop-dates{font-family:var(--mono); font-size:12.5px; color:var(--grey-light); letter-spacing:0.03em; white-space:nowrap;}
+  .stop-org{
+    font-family:var(--mono); font-size:13px; color:var(--amber-bright); letter-spacing:0.03em;
+    margin-bottom:16px; display:flex; gap:10px; align-items:center;
+  }
+  .stop-org .loc{color:var(--grey);}
+  .stop-points{list-style:none; max-width:760px;}
+  .stop-points li{
+    position:relative; padding-left:22px; margin-bottom:11px;
+    font-size:15px; color:var(--grey-light); line-height:1.65;
+  }
+  .stop-points li::before{
+    content:'›'; position:absolute; left:0; top:0; color:var(--amber-bright); font-weight:700;
+  }
+  .stop-points li strong{color:var(--white); font-weight:600;}
+  .stop-tags{
+    display:flex; gap:8px; margin-top:16px; flex-wrap:wrap;
+  }
+  .stop-tag{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.04em;
+    color:var(--grey-light); border:1px solid rgba(255,255,255,0.15);
+    padding:4px 10px; border-radius:20px;
+  }
+  .stop.collapsed .stop-points{display:none;}
+  .stop-toggle{
+    margin-top:14px; font-family:var(--mono); font-size:12px; letter-spacing:0.04em;
+    color:var(--amber-bright); background:none; border:none; cursor:pointer;
+    text-transform:uppercase; padding:0; display:none;
+  }
+
+  /* ============ CAPABILITIES ============ */
+  .capabilities{background:var(--paper-dim);}
+  .cap-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:rgba(11,25,41,0.12);
+    border:1px solid rgba(11,25,41,0.12);
+  }
+  .cap-card{
+    background:var(--paper-dim); padding:36px 32px;
+    transition:background 0.25s ease;
+  }
+  .cap-card:hover{background:var(--white);}
+  .cap-num{
+    font-family:var(--mono); font-size:12px; color:var(--amber); letter-spacing:0.06em; margin-bottom:18px;
+  }
+  .cap-card h3{
+    font-family:var(--display); font-size:21px; font-weight:600; margin-bottom:12px;
+  }
+  .cap-card p{font-size:14.5px; color:var(--steel); margin-bottom:14px;}
+  .cap-stack{
+    display:flex; flex-wrap:wrap; gap:6px;
+  }
+  .cap-stack span{
+    font-family:var(--mono); font-size:11px; color:var(--steel);
+    background:rgba(11,25,41,0.06); padding:4px 9px; border-radius:3px;
+  }
+
+  /* ============ EDUCATION / CREDENTIALS ============ */
+  .credentials{background:var(--paper);}
+  .cred-layout{
+    display:grid; grid-template-columns:1fr 1fr; gap:72px;
+  }
+  .cred-block h3{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--amber); margin-bottom:28px; font-weight:600;
+  }
+  .edu-item{
+    display:grid; grid-template-columns:60px 1fr; gap:18px;
+    padding-bottom:24px; margin-bottom:24px; border-bottom:1px solid rgba(11,25,41,0.1);
+  }
+  .edu-item:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .edu-year{font-family:var(--mono); font-size:13px; color:var(--steel); padding-top:2px;}
+  .edu-school{font-weight:700; font-size:15.5px; margin-bottom:3px;}
+  .edu-deg{font-size:14px; color:var(--steel);}
+  .cert-group{margin-bottom:26px;}
+  .cert-group:last-child{margin-bottom:0;}
+  .cert-group-title{
+    font-size:14px; font-weight:700; color:var(--ink); margin-bottom:12px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .cert-group-title::before{content:''; width:6px; height:6px; background:var(--amber); border-radius:50%; display:inline-block;}
+  .cert-list{list-style:none;}
+  .cert-list li{
+    font-size:14px; color:var(--steel); padding:7px 0 7px 0;
+    display:flex; justify-content:space-between; gap:16px;
+    border-bottom:1px dashed rgba(11,25,41,0.1);
+  }
+  .cert-list li:last-child{border-bottom:none;}
+  .cert-list .cert-year{font-family:var(--mono); font-size:12px; color:var(--grey); white-space:nowrap;}
+
+  /* ============ FOOTER / CONTACT ============ */
+  .contact{
+    background:linear-gradient(180deg, var(--panel) 0%, var(--ink) 100%);
+    color:var(--white); text-align:center; position:relative; overflow:hidden;
+  }
+  .contact-eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:0.14em; color:var(--amber-bright);
+    text-transform:uppercase; margin-bottom:22px;
+  }
+  .contact h2{
+    font-family:var(--display); font-size:clamp(32px,5vw,58px); font-weight:600;
+    max-width:760px; margin:0 auto 28px; line-height:1.1;
+  }
+  .contact p{color:var(--grey-light); font-size:17px; max-width:520px; margin:0 auto 40px;}
+  .contact-actions{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:80px;}
+  .footer-bar{
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding:26px 0; display:flex; justify-content:space-between;
+    font-family:var(--mono); font-size:12px; color:var(--grey); flex-wrap:wrap; gap:10px;
+  }
+
+  /* ============ SCROLL REVEAL ============ */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:980px){
+    .impact-layout, .cred-layout{grid-template-columns:1fr; gap:48px;}
+    .cap-grid{grid-template-columns:1fr 1fr;}
+    .manifest .wrap{grid-template-columns:1fr 1fr;}
+    .manifest-item:nth-child(2){border-right:none;}
+    .hero-top{grid-template-columns:1fr; gap:36px;}
+    .hero-photo-col{flex-direction:row; justify-content:flex-start; gap:18px;}
+    .hero-photo{width:96px; height:96px;}
+    .hero-photo-initials{font-size:30px;}
+  }
+  @media (max-width:760px){
+    .wrap{padding:0 22px;}
+    .nav-links{display:none;}
+    section{padding:80px 0;}
+    .hero{padding-top:120px;}
+    .cap-grid{grid-template-columns:1fr;}
+    .manifest .wrap{grid-template-columns:1fr;}
+    .manifest-item{border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.08);}
+    .section-head{flex-direction:column;}
+    .section-head .section-note{text-align:left;}
+    .stop-role{font-size:20px;}
+    .stop-toggle{display:inline-block;}
+    .hero-actions{flex-direction:column;}
+    .btn{justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="nav-mark"><span class="dot"></span>JOHN SMITH</div>
+    <ul class="nav-links">
+      <li><a href="#impact">Impact</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+    </ul>
+    <a class="nav-cta" href="#contact">Connect</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="hero-text">
+        <div class="hero-eyebrow"><span class="line"></span>VP PRODUCT MANAGEMENT · BI &amp; ANALYTICS</div>
+        <h1>Building the systems that move <em>freight, data, and decisions</em> faster.</h1>
+        <div class="hero-role">26 years turning operations into platforms — from <strong>1.5G–3G network architecture</strong> to <strong>GenAI-driven logistics automation</strong> at enterprise scale.</div>
+        <p class="hero-sub">Direct report to CIO at STG Logistics, leading product, data, and BI/analytics across a $1B+ post-acquisition network. I build the roadmap, the team, and the agentic workflows that get freight — and decisions — where they need to go.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#experience">View Track Record →</a>
+          <a class="btn btn-ghost" href="mailto:John.Smith@fakeemail.com">Get In Touch</a>
+          <a class="btn btn-download" href="resume.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download Resume
+          </a>
+        </div>
+      </div>
+      <div class="hero-photo-col">
+        <div class="hero-photo"><span class="hero-photo-initials">JS</span></div>
+        <span class="hero-photo-caption">Photo placeholder</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="manifest reveal">
+    <div class="wrap">
+      <div class="manifest-item">
+        <div class="manifest-label">Operational Savings</div>
+        <div class="manifest-value"><span>$6M</span>/yr</div>
+        <div class="manifest-desc">Dispatch optimization &amp; fleet utilization, −30% non-revenue miles</div>
+      </div>
+      <div class="manifest-item">
+        <div class="manifest-label">Revenue Enabled</div>
+        <div class="manifest-value"><span>$137M</span></div>
+        <div class="manifest-desc">$12M via RPA automation + $125M via enterprise client onboarding</div>
+      </div>
+      <div class="manifest-item">
+        <div class="manifest-label">Integration Scale</div>
+        <div class="manifest-value"><span>$1B</span></div>
+        <div class="manifest-desc">Post-acquisition program — XPO Intermodal &amp; Drayage</div>
+      </div>
+      <div class="manifest-item">
+        <div class="manifest-label">Safety Improvement</div>
+        <div class="manifest-value"><span>+40%</span></div>
+        <div class="manifest-desc">DOT / FMCSA / CBP compliance across North America fleet</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ IMPACT / ABOUT ============ -->
+<section class="impact" id="impact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-tag">001 — Profile</div>
+        <h2>Operator-grade product leadership.</h2>
+      </div>
+      <div class="section-note">An engineering-rooted PM background, an MBA from Chicago, and two decades of shipping platforms that carry real revenue.</div>
+    </div>
+
+    <div class="impact-layout">
+      <div class="impact-text reveal">
+        <p>I lead product, data, and BI/analytics organizations that sit at the center of physical operations — <strong>fleets, freight networks, dealership workflows, telecom infrastructure</strong> — where the cost of a bad roadmap shows up on a P&amp;L within a quarter, not a year.</p>
+        <p>My path started in <strong>product engineering</strong>, architecting 1.5G–3G cellular systems at Motorola and Nokia, and four patent disclosures in. That systems-level fluency now shows up as a habit: I push teams to instrument first, automate second, and scale only what the data says is working.</p>
+        <p>At STG Logistics, I direct cross-functional teams of engineers, analysts, and operations leaders as a <strong>direct report to the CIO</strong> — owning the product and BI/analytics roadmap for a network running a $1B post-acquisition integration.</p>
+      </div>
+
+      <div class="pillars reveal">
+        <div class="pillar">
+          <div class="pillar-icon">01</div>
+          <div><h3>Operations-Native Product</h3><p>Roadmaps built from dispatch boards, load volumes, and compliance data — not just backlog grooming.</p></div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">02</div>
+          <div><h3>GenAI &amp; Agentic Automation</h3><p>Production agentic workflows for quoting, tendering, and billing — built on RAG, RPA, and Claude Skills.</p></div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">03</div>
+          <div><h3>M&amp;A &amp; Integration at Scale</h3><p>Led the data, infrastructure, and operations alignment for a $1B acquisition integration program.</p></div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">04</div>
+          <div><h3>Regulatory &amp; Compliance Systems</h3><p>DOT, FMCSA, and CBP compliance features shipped as product, not just legal checkboxes.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="experience" id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-tag">002 — Route</div>
+        <h2>Career manifest.</h2>
+      </div>
+      <div class="section-note">Six years directing STG's product and BI org, preceded by two decades across logistics, retail, automotive, travel, and telecom.</div>
+    </div>
+
+    <div class="route">
+      <div class="route-track"></div>
+
+      <div class="stop reveal">
+        <div class="stop-node current"></div>
+        <div class="stop-head">
+          <div class="stop-role">VP, Product Management &amp; BI/Analytics</div>
+          <div class="stop-dates">MAR 2020 — MAR 2026</div>
+        </div>
+        <div class="stop-org">STG Logistics Inc. <span class="loc">· Bensenville, IL · Direct report to CIO</span></div>
+        <ul class="stop-points">
+          <li>Directed cross-functional teams of engineers, analysts, and operations leaders to deliver <strong>~$6M in annual operational savings</strong> through dispatch optimization and fleet utilization, reducing non-revenue miles by ~30%.</li>
+          <li>Enabled <strong>$12M in annual revenue</strong> through automation of spot quoting and network optimization using RPA tools such as Power Automate.</li>
+          <li>Managed a <strong>$1B post-acquisition integration program</strong>, aligning data, infrastructure, and operations for STG's acquisition of XPO's Intermodal and Drayage business.</li>
+          <li>Implemented <strong>GenAI-based agentic workflows</strong> automating quoting, tendering, and billing — improving efficiency and cutting manual processing time.</li>
+          <li>Directed cross-team collaboration to onboard enterprise clients with customized integrations, driving <strong>$125M in new revenue</strong>.</li>
+          <li>Developed DOT, FMCSA, and CBP compliance features that improved road safety by <strong>40%</strong> and achieved regulatory compliance across the North America fleet.</li>
+        </ul>
+        <div class="stop-tags"><span class="stop-tag">Agentic AI</span><span class="stop-tag">RPA</span><span class="stop-tag">M&amp;A Integration</span><span class="stop-tag">Fleet Ops</span><span class="stop-tag">Compliance</span></div>
+        <button class="stop-toggle">Show details</button>
+      </div>
+
+      <div class="stop reveal">
+        <div class="stop-node"></div>
+        <div class="stop-head">
+          <div class="stop-role">Senior Product Manager</div>
+          <div class="stop-dates">FEB 2019 — JAN 2020</div>
+        </div>
+        <div class="stop-org">Ship.Cars LLC <span class="loc">· Schaumburg, IL</span></div>
+        <ul class="stop-points">
+          <li>Led the technical product roadmap for the flagship load-board marketplace, delivering a <strong>4x increase</strong> in monthly load postings and making it the #2 marketplace by total volume.</li>
+          <li>Delivered KPI-driven incremental improvements across iOS and Android apps, achieving <strong>5x active carrier adoption</strong>.</li>
+          <li>Built strategic partnerships to launch new monetization features, increasing carrier revenue by up to <strong>5% per truck</strong>.</li>
+        </ul>
+        <div class="stop-tags"><span class="stop-tag">Marketplace</span><span class="stop-tag">Mobile</span><span class="stop-tag">Monetization</span></div>
+        <button class="stop-toggle">Show details</button>
+      </div>
+
+      <div class="stop reveal">
+        <div class="stop-node"></div>
+        <div class="stop-head">
+          <div class="stop-role">Senior Product Manager, Data Analytics</div>
+          <div class="stop-dates">SEP 2018 — FEB 2019</div>
+        </div>
+        <div class="stop-org">Walgreens Boots Alliance <span class="loc">· Deerfield, IL</span></div>
+        <ul class="stop-points">
+          <li>Built Power BI dashboards monitoring operational and business performance KPIs across engineering and operations teams, generating a <strong>2x improvement</strong> in quality for iterative deployment cycles.</li>
+        </ul>
+        <div class="stop-tags"><span class="stop-tag">Power BI</span><span class="stop-tag">Analytics</span></div>
+        <button class="stop-toggle">Show details</button>
+      </div>
+
+      <div class="stop reveal">
+        <div class="stop-node"></div>
+        <div class="stop-head">
+          <div class="stop-role">Technical Product Owner</div>
+          <div class="stop-dates">FEB 2018 — SEP 2018</div>
+        </div>
+        <div class="stop-org">CNH Industrial <span class="loc">· Burr Ridge, IL</span></div>
+        <ul class="stop-points">
+          <li>Delivered a developer portal, partner API, and data integration program for the Precision Ag telematics platform, enabling <strong>5x growth</strong> in FMIS partnerships.</li>
+        </ul>
+        <div class="stop-tags"><span class="stop-tag">Developer Platform</span><span class="stop-tag">APIs</span></div>
+        <button class="stop-toggle">Show details</button>
+      </div>
+
+      <div class="stop reveal">
+        <div class="stop-node"></div>
+        <div class="stop-head">
+          <div class="stop-role">Senior Product Manager</div>
+          <div class="stop-dates">MAY 2014 — FEB 2018</div>
+        </div>
+        <div class="stop-org">CDK Global <span class="loc">· Hoffman Estates, IL</span></div>
+        <ul class="stop-points">
+          <li>Directed cross-functional initiatives optimizing automotive dealership sales workflows for Quoting/Desking products generating <strong>~$100M in annual revenue</strong>.</li>
+          <li>Launched a cloud-based Quoting integration platform achieving a <strong>2x improvement</strong> in online-to-in-store consumer experience.</li>
+          <li>Integrated supervised machine learning models for used-car valuation, adding up to <strong>2.5% incremental profit margin</strong> for dealership customers.</li>
+        </ul>
+        <div class="stop-tags"><span class="stop-tag">Machine Learning</span><span class="stop-tag">Automotive</span><span class="stop-tag">Cloud Platform</span></div>
+        <button class="stop-toggle">Show details</button>
+      </div>
+
+      <div class="stop reveal">
+        <div class="stop-node"></div>
+        <div class="stop-head">
+          <div class="stop-role">Senior Technical Product Manager</div>
+          <div class="stop-dates">MAY 2013 — MAY 2014</div>
+        </div>
+        <div class="stop-org">Expedia Inc. (Expedia Affiliate Network) <span class="loc">· Springfield, MO</span></div>
+        <ul class="stop-points">
+          <li>Owned a <strong>$10M revenue</strong> white-label program distributing Expedia hotel inventory through affiliate and enterprise partner ecosystems.</li>
+          <li>Delivered new integrations enabling multi-million recurring revenue through cross-sell of hotel inventory on employee benefits and airline cross-sell platforms.</li>
+        </ul>
+        <div class="stop-tags"><span class="stop-tag">White-Label</span><span class="stop-tag">Travel</span></div>
+        <button class="stop-toggle">Show details</button>
+      </div>
+
+      <div class="stop reveal">
+        <div class="stop-node"></div>
+        <div class="stop-head">
+          <div class="stop-role">Product Engineering</div>
+          <div class="stop-dates">JAN 2000 — APR 2013</div>
+        </div>
+        <div class="stop-org">Motorola Networks / Nokia Solution Networks <span class="loc">· Arlington Heights, IL</span></div>
+        <ul class="stop-points">
+          <li>Led architecture and development of <strong>1.5G–3G cellular technology</strong> solutions that doubled network capacity for top-tier carriers.</li>
+          <li>Authored <strong>four patent disclosures</strong> introducing key innovations in wireless communications.</li>
+        </ul>
+        <div class="stop-tags"><span class="stop-tag">Telecom</span><span class="stop-tag">Patents</span><span class="stop-tag">Systems Architecture</span></div>
+        <button class="stop-toggle">Show details</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPABILITIES ============ -->
+<section class="capabilities" id="capabilities">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-tag">003 — Capabilities</div>
+        <h2>What I bring to the table.</h2>
+      </div>
+      <div class="section-note">From roadmap to runtime — the toolkit behind 26 years of shipping product in operations-heavy industries.</div>
+    </div>
+
+    <div class="cap-grid reveal">
+      <div class="cap-card">
+        <div class="cap-num">01</div>
+        <h3>AI &amp; Agentic Systems</h3>
+        <p>Production GenAI workflows, RAG pipelines, and supervised/unsupervised ML deployed against real operational data.</p>
+        <div class="cap-stack"><span>Agentic AI</span><span>RAG</span><span>Claude Skills</span><span>TensorFlow</span><span>PyTorch</span></div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">02</div>
+        <h3>Data Engineering &amp; BI</h3>
+        <p>Built and directed analytics infrastructure that turns operational exhaust into executive-ready decisions.</p>
+        <div class="cap-stack"><span>SQL</span><span>Python</span><span>Snowflake</span><span>Databricks</span><span>dbt</span><span>PySpark</span><span>Power BI</span></div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">03</div>
+        <h3>Program &amp; Roadmap Leadership</h3>
+        <p>Agile delivery, OKR-driven prioritization, and ROI modeling for multi-team, multi-quarter initiatives.</p>
+        <div class="cap-stack"><span>Agile/Scrum</span><span>OKRs</span><span>ROI Modeling</span><span>JIRA</span><span>Confluence</span></div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">04</div>
+        <h3>M&amp;A &amp; Platform Integration</h3>
+        <p>Led data, infrastructure, and operations alignment across a $1B acquisition — the unglamorous work that makes deals real.</p>
+        <div class="cap-stack"><span>Azure</span><span>AWS</span><span>Systems Integration</span></div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">05</div>
+        <h3>Automation &amp; RPA</h3>
+        <p>Automated quoting, tendering, billing, and network optimization workflows that cut manual processing time at scale.</p>
+        <div class="cap-stack"><span>Power Automate</span><span>RPA</span><span>Workflow Automation</span></div>
+      </div>
+      <div class="cap-card">
+        <div class="cap-num">06</div>
+        <h3>Regulated &amp; Compliance Products</h3>
+        <p>Shipped product inside heavily regulated environments — transportation safety, federal compliance — without slowing the roadmap.</p>
+        <div class="cap-stack"><span>DOT</span><span>FMCSA</span><span>CBP</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDENTIALS ============ -->
+<section class="credentials" id="credentials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-tag">004 — Credentials</div>
+        <h2>Education &amp; certifications.</h2>
+      </div>
+      <div class="section-note">A formal grounding in engineering and strategy, kept current with continuous AI/ML certification.</div>
+    </div>
+
+    <div class="cred-layout">
+      <div class="cred-block reveal">
+        <h3>Education</h3>
+        <div class="edu-item">
+          <div class="edu-year">2010</div>
+          <div><div class="edu-school">University of Chicago</div><div class="edu-deg">MBA — General Management, Strategy &amp; Finance</div></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">1999</div>
+          <div><div class="edu-school">Western Illinois University</div><div class="edu-deg">M.S., Computer Science</div></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">1998</div>
+          <div><div class="edu-school">Center for Development of Advanced Computing</div><div class="edu-deg">Post Graduate Diploma</div></div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-year">1996</div>
+          <div><div class="edu-school">University of Pune</div><div class="edu-deg">B.E., Electronics &amp; Telecommunication</div></div>
+        </div>
+      </div>
+
+      <div class="cred-block reveal">
+        <h3>Certifications</h3>
+        <div class="cert-group">
+          <div class="cert-group-title">Machine Learning &amp; AI</div>
+          <ul class="cert-list">
+            <li>Generative AI for Natural Language Processing <span class="cert-year">2025</span></li>
+            <li>Generative AI Workflows with Microsoft Azure <span class="cert-year">2024</span></li>
+            <li>MIT Professional Education — Applied Data Science <span class="cert-year">2023</span></li>
+            <li>Machine Learning Specialization, DeepLearning.AI / Stanford <span class="cert-year">2023</span></li>
+          </ul>
+        </div>
+        <div class="cert-group">
+          <div class="cert-group-title">Product Management</div>
+          <ul class="cert-list">
+            <li>Product Strategy — Kellogg School of Management <span class="cert-year">2019</span></li>
+            <li>Pragmatic Marketing, Level 3 <span class="cert-year">2018</span></li>
+            <li>Certified Product Owner — Scrum Alliance <span class="cert-year">2015</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT / FOOTER ============ -->
+<footer class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-eyebrow reveal">Let's talk</div>
+    <h2 class="reveal">Looking for a product leader who ships in the real world, not just the backlog?</h2>
+    <p class="reveal">Open to Director and VP Product Management conversations — especially where operations, data, and AI intersect.</p>
+    <div class="contact-actions reveal">
+      <a class="btn btn-primary" href="mailto:John.Smith@fakeemail.com">John.Smith@fakeemail.com</a>
+      <a class="btn btn-ghost" href="tel:+11231231234">+1 (123) 123-1234</a>
+    </div>
+  </div>
+  <div class="wrap footer-bar">
+    <span>© 2026 John Smith</span>
+    <span>VP Product Management · BI/Analytics</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el => io.observe(el));
+
+  // Mobile collapse toggles on experience stops
+  document.querySelectorAll('.stop-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const stop = btn.closest('.stop');
+      stop.classList.toggle('collapsed');
+      btn.textContent = stop.classList.contains('collapsed') ? 'Show details' : 'Hide details';
+    });
+  });
+
+  // Collapse all but the first stop by default on small screens
+  function setupMobileCollapse(){
+    const isMobile = window.innerWidth <= 760;
+    document.querySelectorAll('.stop').forEach((stop, i) => {
+      if(isMobile && i > 0){
+        stop.classList.add('collapsed');
+        const btn = stop.querySelector('.stop-toggle');
+        if(btn) btn.textContent = 'Show details';
+      } else {
+        stop.classList.remove('collapsed');
+      }
+    });
+  }
+  setupMobileCollapse();
+  window.addEventListener('resize', setupMobileCollapse);
+</script>
+
+</body>
 </html>
